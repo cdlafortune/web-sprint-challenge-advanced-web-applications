@@ -3,13 +3,15 @@ import {axiosWithAuth} from "../utils/axiosWithAuth";
 
 const initialColor = {
   color: "",
-  code: { hex: "" }
+  code: { hex: "" },
+  id: 0,
 };
 
 const ColorList = ({ colors, updateColors }) => {
   console.log(colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
+  let id = colorToEdit.id;
 
   const editColor = color => {
     setEditing(true);
@@ -21,13 +23,13 @@ const ColorList = ({ colors, updateColors }) => {
     // Make a put request to save your updated color
     // think about where will you get the id from...
     // where is is saved right now?
-    axiosWithAuth().put(`http://localhost:5000/api/colors/${colorToEdit.id}`);
+    axiosWithAuth().put(`http://localhost:5000/api/colors/${id}`);
     console.log("edited!")
   };
 
   const deleteColor = color => {
     // make a delete request to delete this color
-    axiosWithAuth().delete(`http://localhost:5000/api/colors/${colorToEdit.id}`);
+    axiosWithAuth().delete(`http://localhost:5000/api/colors/${id}`);
     console.log("deleted!");
   };
 
